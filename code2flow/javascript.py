@@ -5,6 +5,7 @@ import subprocess
 
 from .model import (Group, Node, Call, Variable, BaseLanguage,
                     OWNER_CONST, GROUP_TYPE, is_installed, djoin, flatten)
+from security import safe_command
 
 
 def lineno(el):
@@ -234,7 +235,7 @@ def get_acorn_version():
     Get the version of installed acorn
     :rtype: str
     """
-    proc = subprocess.Popen(['node', '-p', 'require(\'acorn/package.json\').version'],
+    proc = safe_command.run(subprocess.Popen, ['node', '-p', 'require(\'acorn/package.json\').version'],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                             cwd=os.path.dirname(os.path.realpath(__file__)))
     assert proc.wait() == 0, "Acorn is required to parse javascript files. " \
