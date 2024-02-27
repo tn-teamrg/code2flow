@@ -564,8 +564,7 @@ class Group():
         :rtype: Node|None
         """
         assert self.group_type == GROUP_TYPE.CLASS
-        constructors = [n for n in self.nodes if n.is_constructor]
-        if constructors:
+        if constructors := [n for n in self.nodes if n.is_constructor]:
             return constructors[0]
 
     def all_groups(self):

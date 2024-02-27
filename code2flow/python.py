@@ -51,8 +51,7 @@ def make_calls(lines):
         for element in ast.walk(tree):
             if type(element) != ast.Call:
                 continue
-            call = get_call_from_func_element(element.func)
-            if call:
+            if call := get_call_from_func_element(element.func):
                 calls.append(call)
     return calls
 

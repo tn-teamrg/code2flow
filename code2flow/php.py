@@ -157,8 +157,7 @@ def process_assign(assignment_el):
         return None
 
     varname = assignment_el['var']['name']
-    call = get_call_from_expr(assignment_el['expr'])
-    if call:
+    if call := get_call_from_expr(assignment_el['expr']):
         return Variable(varname, call, line_number=lineno(assignment_el))
     # else is something like `varname = num`
     return None

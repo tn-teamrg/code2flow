@@ -379,8 +379,7 @@ def _find_link_for_call(call, node_a, all_nodes):
     all_vars = node_a.get_variables(call.line_number)
 
     for var in all_vars:
-        var_match = call.matches_variable(var)
-        if var_match:
+        if var_match := call.matches_variable(var):
             # Unknown modules (e.g. third party) we don't want to match)
             if var_match == OWNER_CONST.UNKNOWN_MODULE:
                 return None, None
@@ -531,8 +530,7 @@ def map_it(sources, extension, no_trimming, exclude_namespaces, exclude_function
     bad_calls_strings = set()
     for bad_call in bad_calls:
         bad_calls_strings.add(bad_call.to_string())
-    bad_calls_strings = list(sorted(list(bad_calls_strings)))
-    if bad_calls_strings:
+    if bad_calls_strings := list(sorted(list(bad_calls_strings))):
         logging.info("Skipped processing these calls because the algorithm "
                      "linked them to multiple function definitions: %r." % bad_calls_strings)
 
