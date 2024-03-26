@@ -255,7 +255,7 @@ class Javascript(BaseLanguage):
             logging.warning("Acorn is required to parse javascript files. "
                             "Version %r was found but code2flow has only been "
                             "tested on 8.*", version)
-        logging.info("Using Acorn %s" % version)
+        logging.info("Using Acorn %s", version)
 
     @staticmethod
     def get_tree(filename, lang_params):

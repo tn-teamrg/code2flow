@@ -323,7 +323,7 @@ def get_sources_and_language(raw_source_paths, language):
                              "and language {language}.")
 
     sources = sorted(list(sources))
-    logging.info("Processing %d source file(s)." % (len(sources)))
+    logging.info("Processing %d source file(s).", (len(sources)))
     for source in sources:
         logging.info("  " + source)
 
@@ -508,11 +508,11 @@ def map_it(sources, extension, no_trimming, exclude_namespaces, exclude_function
         node.resolve_variables(file_groups)
 
     # Not a step. Just log what we know so far
-    logging.info("Found groups %r." % [g.label() for g in all_subgroups])
-    logging.info("Found nodes %r." % sorted(n.token_with_ownership() for n in all_nodes))
-    logging.info("Found calls %r." % sorted(list(set(c.to_string() for c in
+    logging.info("Found groups %r.", [g.label() for g in all_subgroups])
+    logging.info("Found nodes %r.", sorted(n.token_with_ownership() for n in all_nodes))
+    logging.info("Found calls %r.", sorted(list(set(c.to_string() for c in
                                                      flatten(n.calls for n in all_nodes)))))
-    logging.info("Found variables %r." % sorted(list(set(v.to_string() for v in
+    logging.info("Found variables %r.", sorted(list(set(v.to_string() for v in
                                                          flatten(n.variables for n in all_nodes)))))
 
     # 6. Find all calls between all nodes
@@ -534,7 +534,7 @@ def map_it(sources, extension, no_trimming, exclude_namespaces, exclude_function
     bad_calls_strings = list(sorted(list(bad_calls_strings)))
     if bad_calls_strings:
         logging.info("Skipped processing these calls because the algorithm "
-                     "linked them to multiple function definitions: %r." % bad_calls_strings)
+                     "linked them to multiple function definitions: %r.", bad_calls_strings)
 
     if no_trimming:
         return file_groups, all_nodes, edges
@@ -649,7 +649,7 @@ def _generate_graphviz(output_file, extension, final_img_filename):
     with open(final_img_filename, 'w') as f:
         try:
             subprocess.run(command, stdout=f, check=True)
-            logging.info("Graphviz finished in %.2f seconds." % (time.time() - start_time))
+            logging.info("Graphviz finished in %.2f seconds.", (time.time() - start_time))
         except subprocess.CalledProcessError:
             logging.warning("*** Graphviz returned non-zero exit code! "
                             "Try running %r for more detail ***", ' '.join(command + ['-v', '-O']))
@@ -761,7 +761,7 @@ def code2flow(raw_source_paths, output_file, language=None, hide_legend=True,
                  output_file, len(all_nodes), len(edges))
     if not output_ext == 'json':
         logging.info("For better machine readability, you can also try outputting in a json format.")
-    logging.info("Code2flow finished processing in %.2f seconds." % (time.time() - start_time))
+    logging.info("Code2flow finished processing in %.2f seconds.", (time.time() - start_time))
 
     # translate to an image if that was requested
     if final_img_filename:
