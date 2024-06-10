@@ -103,7 +103,7 @@ def walk(tree):
         return ret
 
     for v in tree.values():
-        if isinstance(v, list) or (isinstance(v, dict) and v.get('nodeType')):
+        if isinstance(v, (list, dict)) and v.get('nodeType'):
             ret += walk(v)
     return ret
 
