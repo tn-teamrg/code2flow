@@ -13,6 +13,7 @@ from .ruby import Ruby
 from .php import PHP
 from .model import (TRUNK_COLOR, LEAF_COLOR, NODE_COLOR, GROUP_TYPE, OWNER_CONST,
                     Edge, Group, Node, Variable, is_installed, flatten)
+from security import safe_command
 
 VERSION = '2.5.0'
 
@@ -648,7 +649,7 @@ def _generate_graphviz(output_file, extension, final_img_filename):
     command = ["dot", "-T" + extension, output_file]
     with open(final_img_filename, 'w') as f:
         try:
-            subprocess.run(command, stdout=f, check=True)
+            safe_command.run(subprocess.run, command, stdout=f, check=True)
             logging.info("Graphviz finished in %.2f seconds." % (time.time() - start_time))
         except subprocess.CalledProcessError:
             logging.warning("*** Graphviz returned non-zero exit code! "
