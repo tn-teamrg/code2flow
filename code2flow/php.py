@@ -4,6 +4,7 @@ import subprocess
 
 from .model import (Group, Node, Call, Variable, BaseLanguage,
                     OWNER_CONST, GROUP_TYPE, is_installed, flatten, djoin)
+from security import safe_command
 
 
 def lineno(tree):
@@ -222,7 +223,7 @@ def run_ast_parser(filename):
     script_loc = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                               "get_ast.php")
     cmd = ["php", script_loc, filename]
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = safe_command.run(subprocess.Popen, cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return proc.communicate()[0], proc.returncode
 
 
